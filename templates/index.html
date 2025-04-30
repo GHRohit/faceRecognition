@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/color-calendar/dist/css/theme-basic.css" />
+
+</head>
+
+<body>
+
+    {% if messages %}
+    <div id="overlay" class="modal">
+        {% for message in messages %}
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>{{ message }}</p>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="attendance-page">
+
+        <div class="resource">
+            <div style="display:flex; gap:70px;">
+                <div class="card time">
+                    <h3>{{ datetoday }}</h3>
+                    <h3 id="clock"></h3>
+                </div>
+                <div class="card summary">
+                    <h3>Present Today</h3>
+                    <p>{{ totalPresent }}</p>
+                </div>
+            </div>
+            <div id="color-calendar"></div>
+        </div>
+
+        <div class="card list">
+            <div class="card-header">
+                <a href="/start/"><button class="btn">Take Attendance</button></a>
+                <button class="btn" id="add-student-btn">Add Student</button>
+            </div>
+            <table role="table">
+                <thead role="rowgroup">
+                    <tr role="row">
+                        <th role="columnheader">S.No.</th>
+                        <th role="columnheader">Student ID</th>
+                        <th role="columnheader">Name</th>
+                        <th role="columnheader">Time</th>
+                    </tr>
+                </thead>
+                <tbody role="rowgroup">
+                    {% if totalPresent %}
+                    {% for attendance in attendance_data %}
+                    <tr role="row">
+                        <td role="cell">{{ forloop.counter }}</td>
+                        <td role="cell">{{ attendance.student_id }}</td>  <!-- Access student_id -->
+                        <td role="cell">{{ attendance.student_name }}</td>  <!-- Access student_name -->
+                        <td role="cell">{{ attendance.attendance_time }}</td>  <!-- Access attendance_time -->
+                    </tr>
+                    {% endfor %}
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    {% include 'form.html' %}
+
+
+    <script src="{% static 'JavaScript/script.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/color-calendar/dist/bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+</body>
+
+</html>

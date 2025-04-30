@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 # faceRecognition
+=======
+# FaRe
+>>>>>>> master

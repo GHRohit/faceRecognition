@@ -1,0 +1,85 @@
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+*.out
+*.err
+
+# Dependency directories
+__pycache__/
+*.egg-info/
+.eggs/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Build and output directories
+dist/
+build/
+out/
+*.exe
+*.dll
+*.so
+*.dylib
+*.pyc
+*.pyo
+*.class
+
+# IDE and editor files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.old
+
+# Test coverage
+coverage/
+*.coverage
+*.lcov
+htmlcov/
+
+# Generated files
+*.min.js
+*.min.css
+*.map
+*.generated.*
+
+# Machine-specific files
+*.iml
+*.ipr
+*.iws
+*.pkl
+
+# Database files
+*.CSV
+*.sqlite3
+*.db
+
+# Media and migrations
+media/faces/
+faceRecognition/migrations/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Python virtual environment
+pip-log.txt
+pip-delete-this-directory.txt
