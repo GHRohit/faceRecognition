@@ -31,7 +31,7 @@ def datetoday():
 
 
 # Initialize the face detector and video capture object for webcam access
-face_detector = cv2.CascadeClassifier(CASCADECLASSIFIER_PATH)
+face_detector = cv2.CascadeClassifier(str(CASCADECLASSIFIER_PATH))
 
 # Create necessary directories if they do not exist
 for directory in [ATTENDANCE_DIR, FACES_DIR]:
