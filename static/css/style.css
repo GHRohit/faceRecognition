@@ -1,0 +1,455 @@
+/* ==========================================================================
+   1. Base Styles & Resets
+   ========================================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Consistent box model */
+}
+
+body {
+    /* Consider adding base font-family, background-color, color here */
+    /* e.g., font-family: sans-serif; */
+    background-color: #f0f2f5; 
+    color: #333;
+    line-height: 1.6; /* Improve readability */
+}
+
+/* ==========================================================================
+   2. Layout Styles
+   ========================================================================== */
+
+/* Main page container */
+.attendance-page {
+    /* height: 100vh; Consider if this is really needed, might restrict scrolling */
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap */
+    gap: 30px; /* Spacing between main sections */
+    padding: 2rem; /* Add some padding around the page */
+    max-width: 1400px; /* Optional: Constrain max width */
+    margin: 0 auto; /* Center the page content */
+}
+
+/* Resource section container (time, summary, calendar) */
+.resource {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center items horizontally */
+    /* Removed fixed width for better flexibility, use flex-basis or similar if needed */
+    flex: 1 1 400px; /* Allow shrinking/growing, base width 400px */
+    min-width: 300px; /* Prevent from becoming too narrow */
+}
+
+/* List section container (attendance table) */
+.list {
+    /* Removed fixed width for better flexibility */
+    flex: 2 1 600px; /* Allow shrinking/growing, base width 600px, takes more space */
+    min-width: 400px;
+}
+
+/* Flex container specifically for time and summary cards */
+.resource > div:first-of-type { /* More specific selector if HTML structure is known */
+    display: flex;
+    gap: 20px; /* Adjust gap as needed */
+    justify-content: center; /* Center cards horizontally */
+    flex-wrap: wrap; /* Allow cards to wrap on smaller screens */
+    margin-bottom: 2rem; /* Space below the cards */
+}
+
+/* ==========================================================================
+   3. Component Styles
+   ========================================================================== */
+
+/* --- Cards --- */
+
+/* Base styling for all card elements */
+.card {
+    background-color: #fff; /* Add a background */
+    border: 1px solid #ddd; /* Lighter border */
+    border-radius: 8px; /* More rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Softer shadow */
+    padding: 1.5rem; /* Consistent padding */
+    /* Removed margin: auto; as flex layout handles positioning */
+    width: 100%; /* Take full width of parent container by default */
+}
+
+/* Specific width/styling for summary and time cards */
+.card.summary,
+.card.time {
+    min-width: 150px; /* Minimum width */
+    text-align: center;
+    flex: 1; /* Allow them to share space */
+    /* Add specific background/color if desired, e.g., from previous examples */
+}
+
+/* Example: Add gradient backgrounds if needed */
+/*
+.card.time { background: linear-gradient(135deg, #3a7bd5, #00d2ff); color: white; }
+.card.summary { background: linear-gradient(135deg, #11998e, #38ef7d); color: white; }
+*/
+
+/* Styling for the header within cards */
+.card-header {
+    border-bottom: 1px solid #eee; /* Lighter border */
+    padding-bottom: 1rem; /* Adjust spacing */
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping */
+    justify-content: space-between; /* Space out items */
+    align-items: center; /* Vertically align items */
+    margin-bottom: 1.5rem; /* Space below header */
+    gap: 1rem; /* Space between items if they wrap */
+}
+
+/* Styling for h2 elements within card headers */
+.card-header h2 {
+    margin: 0;
+    font-size: 1.5rem; /* Adjust size */
+    font-weight: 600; /* Semi-bold */
+}
+
+/* --- Buttons --- */
+
+/* Base button styling */
+.btn {
+    background-color: #008CBA; /* Primary blue */
+    border: none;
+    color: white;
+    padding: 0.75rem 1.5rem; /* Adjust padding */
+    border-radius: 6px; /* Match card radius */
+    cursor: pointer;
+    font-size: 0.95rem; /* Adjust size */
+    font-weight: 600;
+    text-align: center;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    display: inline-block; /* Proper button behavior */
+    text-decoration: none; /* Remove underline if used on <a> tags */
+}
+
+/* Hover effect for buttons */
+.btn:hover {
+    background-color: #005B7F; /* Darker blue */
+    transform: translateY(-1px); /* Slight lift */
+}
+
+/* Active effect for buttons */
+.btn:active {
+    transform: scale(0.98);
+}
+
+/* --- Tables --- */
+
+/* Base table styling */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 1rem; /* Space above table if needed */
+}
+
+/* Styling for table header cells (th) and data cells (td) */
+th,
+td {
+    text-align: left;
+    padding: 0.8rem 1rem; /* Adjust padding */
+    border-bottom: 1px solid #eee; /* Lighter border */
+    vertical-align: middle; /* Align content vertically */
+}
+
+/* Styling specifically for table header cells (th) */
+th {
+    background-color: #f8f9fa; /* Light background */
+    color: #444; /* Darker text */
+    font-weight: 600; /* Semi-bold */
+    border-bottom-width: 2px; /* Thicker bottom border */
+    border-color: #ddd; /* Match other borders */
+}
+
+/* Alternate row background color for readability */
+tr:nth-child(even) {
+    background-color: #f9f9f9; /* Very light gray */
+}
+
+/* Hover effect for table rows */
+tr:hover {
+    background-color: #f1f1f1; /* Slightly darker hover */
+}
+
+/* --- Modals --- */
+
+/* Style the modal popup backdrop */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto; /* Enable vertical scroll */
+    background-color: rgba(0, 0, 0, 0.6); /* Dark semi-transparent */
+    backdrop-filter: blur(5px); /* Optional: blur */
+    padding: 2rem 1rem; /* Padding on backdrop */
+}
+
+/* Style the modal content container */
+.modal-content {
+    background-color: #fefefe; /* White background */
+    margin: auto; /* Centered */
+    padding: 2.5rem;
+    border: none;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 600px; /* Max width */
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    animation: modalFadeIn 0.3s ease-out;
+}
+
+/* Simple fade-in animation */
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Style the close button ('x') */
+
+.modal .close {
+    color: #aaa;
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 2rem;
+    font-weight: bold;
+    line-height: 1;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.modal .close:hover,
+.modal .close:focus {
+    color: #333;
+    text-decoration: none;
+}
+
+/* --- Forms (within Modal) --- */
+
+/* Remove default form margin */
+.modal-content form {
+    margin: 0;
+}
+
+/* Style for form labels */
+.modal-content form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #444;
+    font-size: 0.9rem;
+}
+
+/* Styling for text inputs, email, tel, date, number, and select */
+.modal-content form input[type="text"],
+.modal-content form input[type="email"],
+.modal-content form input[type="tel"],
+.modal-content form input[type="date"],
+.modal-content form input[type="number"],
+.modal-content form select {
+    padding: 0.8rem 1rem;
+    width: 100%;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    margin-bottom: 1.2rem;
+    box-sizing: border-box;
+    font-size: 1rem;
+    color: #333;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Focus effect for inputs and select */
+.modal-content form input:focus,
+.modal-content form select:focus {
+    outline: none;
+    border-color: #007bff; /* Focus color */
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15); /* Focus glow */
+}
+
+/* Specific styling for select dropdown arrow (optional) */
+.modal-content form select {
+    appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23cccccc%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 0.8em auto;
+    padding-right: 2.5rem; /* Space for arrow */
+}
+
+/* Style the main submit button using its class */
+.form-submit {
+    background-color: #007bff; /* Match focus color */
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    width: 100%; /* Full width */
+    margin-top: 1rem;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.form-submit:hover {
+    background-color: #0056b3; /* Darker blue */
+}
+.form-submit:active {
+    transform: scale(0.98); /* Click effect */
+}
+
+/* Style the error message box */
+.error-message {
+    background-color: #ffebee;
+    color: #c62828;
+    padding: 0.8rem 1rem;
+    border-radius: 6px;
+    margin-bottom: 1.5rem;
+    border: 1px solid #ef9a9a;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+/* --- Calendar --- */
+
+/* Styling for the color calendar container */
+#color-calendar {
+    min-height: 300px;
+    margin-top: 1.5rem; /* Space above the calendar */
+    padding: 1rem; /* Inner spacing */
+    background: white; /* Match card background */
+    border-radius: 12px; /* Match modal radius */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+}
+
+
+/* ==========================================================================
+   4. Media Queries & Responsive Styles
+   ========================================================================== */
+
+/* Adjustments for smaller screens (e.g., tablets) */
+@media screen and (max-width: 768px) {
+    /* Adjust card header layout */
+    .card-header {
+        align-items: flex-start; /* Align items to top */
+    }
+    .card-header h2 {
+        margin-bottom: 0.5rem; /* Add space below title if it wraps */
+    }
+
+    /* Stack resource cards */
+     .resource > div:first-of-type {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .card.summary,
+    .card.time {
+        width: 100%; /* Make time/summary cards full width */
+        flex-basis: auto; /* Reset flex basis */
+    }
+}
+
+/* Responsive table styling for smaller screens */
+@media only screen and (max-width: 760px) {
+
+    /* Force table elements to display as blocks */
+    table,
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
+        display: block;
+    }
+
+    /* Hide table headers visually but keep accessible */
+    thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    tr {
+        margin: 0 0 1rem 0;
+        border: 1px solid #ccc; /* Add border around each 'row' */
+        border-radius: 4px; /* Optional: rounded corners */
+    }
+
+    /* Remove alternating background */
+    tr:nth-child(even) {
+        background-color: transparent;
+    }
+    /* Remove hover effect */
+     tr:hover {
+        background-color: transparent;
+    }
+
+    td {
+        /* Behave like a "row" */
+        border: none;
+        border-bottom: 1px solid #eee; /* Separator between 'cells' */
+        position: relative;
+        padding-left: 45%; /* Make space for the label */
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        min-height: 2.5em; /* Ensure cells have some height */
+        display: flex; /* Use flex for better vertical alignment */
+        align-items: center;
+    }
+     td:last-child {
+        border-bottom: none; /* Remove border from last cell */
+    }
+
+    /* Style the ::before pseudo-element to act as the header label */
+    td:before {
+        content: attr(data-label); /* Use data-label attribute from HTML */
+        position: absolute;
+        top: 0;
+        left: 6px;
+        width: 40%; /* Adjust width of the label area */
+        padding-right: 10px;
+        white-space: nowrap; /* Prevent label text wrapping */
+        font-weight: 600; /* Make label bold */
+        color: #555;
+        height: 100%; /* Full height */
+        display: flex; /* Align label text vertically */
+        align-items: center;
+    }
+
+    /* You'll need to add data-label attributes to your HTML tds */
+    /* Example: <td data-label="S.No.">{{ forloop.counter }}</td> */
+    /* The CSS below is fallback if data-label isn't used, but data-label is better */
+
+    /* Fallback label content (if not using data-label attribute) */
+    /*
+    td:nth-of-type(1):before { content: "S.No."; }
+    td:nth-of-type(2):before { content: "Name"; }
+    td:nth-of-type(3):before { content: "Roll"; }
+    td:nth-of-type(4):before { content: "Time"; }
+    */
+}
+
+/* Adjustments for very small screens (e.g., mobile phones) */
+@media screen and (max-width: 640px) {
+    .attendance-page {
+        padding: 1rem; /* Reduce page padding */
+    }
+    /* Adjust modal content padding */
+    .modal-content {
+        width: 95%;
+        padding: 1.5rem;
+    }
+    /* Adjust modal close button position */
+    .modal .close {
+        top: 0.5rem;
+        right: 1rem;
+        font-size: 1.8rem;
+    }
+}
