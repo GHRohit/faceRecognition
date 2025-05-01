@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-%m!%qsu7cdhdy@)2=u1)6exyx5ho0w^)e)yhghvrkm@pj%h&1x
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://ghrohit.github.io/faceRecognition/']
 
 
 # Application definition
