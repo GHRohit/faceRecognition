@@ -39,11 +39,7 @@ jobs:
         run: |
           python manage.py collectstatic --noinput
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: staticfiles/  # Directory where Django collects static files
-
+      
   # Deployment job
   deploy:
     environment:
