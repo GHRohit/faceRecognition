@@ -39,10 +39,14 @@ jobs:
         run: |
           python manage.py collectstatic --noinput
 
+      - name: Verify static files
+        run: ls static/
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: static/  # Directory where Django collects static files
+          name: github-pages  # Ensure the artifact name matches
 
   # Deployment job
   deploy:
